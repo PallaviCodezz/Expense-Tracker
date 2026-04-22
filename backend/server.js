@@ -2,11 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import dns from "dns";
-
-// Force Node.js to use Google DNS
-dns.setDefaultResultOrder("ipv4first");
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 import authRoutes from "./routes/authRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
@@ -17,7 +12,18 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow tools like Postman (no origin) and local frontend dev ports.
+      if (!origin || /^http:\/\/localhost:\d+$/.test(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
@@ -31,7 +37,9 @@ app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
 // Connect to MongoDB and start server
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    serverSelectionTimeoutMS: 10000,
+  })
   .then(() => {
     console.log("MongoDB connected");
     app.listen(process.env.PORT || 4000, () =>

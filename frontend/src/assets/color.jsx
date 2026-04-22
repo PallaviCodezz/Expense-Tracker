@@ -92,3 +92,26 @@ export const colorClasses = {
       iconBg: "bg-orange-100 text-orange-600",
     },
   };
+
+export const transactionItemStyles = {
+  container: (isEditing, classes) =>
+    `flex flex-col md:flex-row items-stretch justify-between gap-3 p-4 rounded-xl border border-gray-100 mb-3 last:mb-0 ${isEditing ? classes.bg : "hover:bg-gray-50"}`,
+  mainContainer: "flex items-center gap-3 flex-1 min-w-0",
+  actionsContainer: "flex items-center justify-between gap-3 mt-2 md:mt-0",
+  amountContainer: "min-w-[100px] flex-shrink-0 flex justify-end",
+  buttonsContainer: "flex gap-1 flex-shrink-0",
+  iconContainer: (iconClass, classes) => `${iconClass} ${classes.iconBg}`,
+  contentContainer: "min-w-0 flex-1",
+  description: "font-medium text-gray-800 truncate",
+  details: "text-xs text-gray-500 mt-1 truncate",
+  input: (hasError, classes) =>
+    `w-full bg-white rounded-lg px-3 py-2 focus:outline-none focus:ring-1 border ${hasError ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`,
+  amountInput: (hasError, classes) =>
+    `w-full max-w-[120px] bg-white rounded-lg px-3 py-2 focus:outline-none focus:ring-1 border ${hasError ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`,
+  errorText: "text-xs text-red-600 mt-1",
+  amountText: (amountClass, classes) => `${amountClass} ${classes.text}`,
+  saveButton: (classes) => `p-2 ${classes.button} rounded-lg`,
+  cancelButton: "p-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400",
+  editButton: (classes) => `p-2 ${classes.text} rounded-lg hover:${classes.bg}`,
+  deleteButton: (classes) => `p-2 ${classes.text} rounded-lg hover:${classes.bg}`,
+};

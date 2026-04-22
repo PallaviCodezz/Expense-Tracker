@@ -23,6 +23,7 @@ import {
 } from "recharts";
 import axios from "axios";
 import { exportToExcel } from "../utils/exportUtils";
+import { getAuthHeaders } from "../utils/auth.js";
 import AddTransactionModal from "../components/Add";
 import TransactionItem from "../components/TransactionItem";
 import TimeFrameSelector from "../components/TimeFrame";
@@ -200,7 +201,7 @@ const IncomePage = () => {
   });
 
   const getAuthHeaders = useCallback(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
     return token ? { Authorization: `Bearer ${token}` } : {};
   }, []);
 
@@ -665,4 +666,4 @@ const IncomePage = () => {
   );
 };
 
-export default Income;
+export default IncomePage;

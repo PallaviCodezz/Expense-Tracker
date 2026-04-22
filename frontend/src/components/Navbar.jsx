@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronDown, User, LogOut, Settings } from "lucide-react";
+import { ChevronDown, User, LogOut, Sparkles, Waves } from "lucide-react";
 import { navbarStyles as styles } from "../assets/dummyStyles.js";
 
-const Navbar = ({ user, onLogout }) => {
+const Navbar = ({ user, onLogout, themeMode = "ocean", onToggleTheme }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -29,7 +29,17 @@ const Navbar = ({ user, onLogout }) => {
           <span className={styles.logoText}>ExpenseTracker</span>
         </div>
 
-        <div className={styles.userContainer} ref={menuRef}>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl border border-cyan-800/40 bg-cyan-900/20 text-cyan-100 hover:bg-cyan-800/35 transition-all"
+            title="Toggle neon mode"
+          >
+            {themeMode === "neon" ? <Sparkles className="w-4 h-4" /> : <Waves className="w-4 h-4" />}
+            <span className="text-xs font-medium">{themeMode === "neon" ? "Neon" : "Ocean"}</span>
+          </button>
+          <div className={styles.userContainer} ref={menuRef}>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={styles.userButton}
@@ -76,6 +86,7 @@ const Navbar = ({ user, onLogout }) => {
               </div>
             </div>
           )}
+          </div>
         </div>
       </div>
     </header>

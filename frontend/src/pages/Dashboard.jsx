@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
-  PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
+  PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid,
 } from "recharts";
 import {
   DollarSign, TrendingUp, TrendingDown, PiggyBank,
@@ -25,6 +26,50 @@ const calculateData = (transactions) => ({
   expenses: transactions.filter((t) => t.type === "expense").reduce((s, t) => s + Number(t.amount), 0),
 });
 
+const buildTrendData = (transactions) => {
+  const grouped = {};
+  transactions.forEach((t) => {
+    const d = new Date(t.date);
+    const key = `${d.getMonth() + 1}/${d.getDate()}`;
+    if (!grouped[key]) grouped[key] = { label: key, income: 0, expense: 0 };
+    if (t.type === "income") grouped[key].income += Number(t.amount) || 0;
+    if (t.type === "expense") grouped[key].expense += Number(t.amount) || 0;
+  });
+  return Object.values(grouped)
+    .slice(-10)
+    .map((row) => ({ ...row, balance: row.income - row.expense }));
+};
+
+const AnimatedValue = ({ value, prefix = "", suffix = "", decimals = 0, className = "" }) => {
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    const target = Number(value) || 0;
+    let current = 0;
+    const duration = 700;
+    const steps = 36;
+    const increment = target / steps;
+    const timer = setInterval(() => {
+      current += increment;
+      const done = Math.abs(current) >= Math.abs(target);
+      setDisplay(done ? target : current);
+      if (done) clearInterval(timer);
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <span className={className}>
+      {prefix}
+      {Number(display).toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}
+      {suffix}
+    </span>
+  );
+};
+
 function toIsoWithClientTime(dateValue) {
   if (!dateValue) return new Date().toISOString();
   if (typeof dateValue === "string" && dateValue.length === 10) {
@@ -47,6 +92,7 @@ const Dashboard = () => {
   const [gaugeData, setGaugeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [overviewMeta, setOverviewMeta] = useState({});
+  const [activePieIndex, setActivePieIndex] = useState(-1);
   const [showAllIncome, setShowAllIncome] = useState(false);
   const [showAllExpense, setShowAllExpense] = useState(false);
   const [newTransaction, setNewTransaction] = useState({
@@ -152,6 +198,16 @@ const Dashboard = () => {
     return Object.entries(cats).map(([name, value]) => ({ name, value: Math.round(value) }));
   }, [filteredTransactions, overviewMeta]);
 
+  const trendData = useMemo(
+    () => buildTrendData(filteredTransactions),
+    [filteredTransactions]
+  );
+
+  const topExpenseCategory = useMemo(() => {
+    if (!financialOverviewData.length) return "No data";
+    return financialOverviewData.reduce((a, b) => (a.value > b.value ? a : b)).name;
+  }, [financialOverviewData]);
+
   const incomeTransactions = useMemo(
     () => filteredTransactions.filter((t) => t.type === "income").sort((a, b) => new Date(b.date) - new Date(a.date)),
     [filteredTransactions]
@@ -212,33 +268,100 @@ const Dashboard = () => {
 
       {/* Summary Cards */}
       <div className={dashboardStyles.summaryGrid}>
-        <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 border-l-4 border-l-teal-500">
+        <motion.div whileHover={{ y: -6, scale: 1.01 }} className="bg-[#0f1c33]/95 rounded-xl p-5 shadow-sm border border-cyan-900/40 border-l-4 border-l-cyan-400">
           <div className="flex items-center gap-3 mb-2">
             <div className={dashboardStyles.walletIconContainer}><TrendingUp className="w-5 h-5 text-teal-600" /></div>
-            <span className="text-sm text-gray-500">Total Income</span>
+            <span className="text-sm text-cyan-100/70">Total Income</span>
           </div>
-          <p className="text-2xl font-bold text-gray-800">${displayIncome.toLocaleString()}</p>
-          <p className="text-xs text-gray-500 mt-2">{timeFrameRange.label}</p>
-        </div>
+          <p className="text-2xl font-bold text-cyan-50">
+            <AnimatedValue value={displayIncome} prefix="$" />
+          </p>
+          <p className="text-xs text-cyan-100/70 mt-2">{timeFrameRange.label}</p>
+        </motion.div>
 
-        <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 border-l-4 border-l-orange-500">
+        <motion.div whileHover={{ y: -6, scale: 1.01 }} className="bg-[#0f1c33]/95 rounded-xl p-5 shadow-sm border border-cyan-900/40 border-l-4 border-l-orange-400">
           <div className="flex items-center gap-3 mb-2">
             <div className={dashboardStyles.arrowDownIconContainer}><TrendingDown className="w-5 h-5 text-orange-600" /></div>
-            <span className="text-sm text-gray-500">Total Expenses</span>
+            <span className="text-sm text-cyan-100/70">Total Expenses</span>
           </div>
-          <p className="text-2xl font-bold text-gray-800">${displayExpenses.toLocaleString()}</p>
-          <p className="text-xs text-gray-500 mt-2">{timeFrameRange.label}</p>
-        </div>
+          <p className="text-2xl font-bold text-cyan-50">
+            <AnimatedValue value={displayExpenses} prefix="$" />
+          </p>
+          <p className="text-xs text-cyan-100/70 mt-2">{timeFrameRange.label}</p>
+        </motion.div>
 
-        <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 border-l-4 border-l-cyan-500">
+        <motion.div whileHover={{ y: -6, scale: 1.01 }} className="bg-[#0f1c33]/95 rounded-xl p-5 shadow-sm border border-cyan-900/40 border-l-4 border-l-teal-400">
           <div className="flex items-center gap-3 mb-2">
             <div className={dashboardStyles.piggyBankIconContainer}><PiggyBank className="w-5 h-5 text-cyan-600" /></div>
-            <span className="text-sm text-gray-500">Savings</span>
+            <span className="text-sm text-cyan-100/70">Savings</span>
           </div>
-          <p className={`text-2xl font-bold ${displaySavings >= 0 ? "text-gray-800" : "text-red-600"}`}>
-            ${displaySavings.toLocaleString()}
+          <p className={`text-2xl font-bold ${displaySavings >= 0 ? "text-cyan-50" : "text-red-400"}`}>
+            <AnimatedValue value={displaySavings} prefix="$" />
           </p>
-          <p className="text-xs text-gray-500 mt-2">{timeFrameRange.label}</p>
+          <p className="text-xs text-cyan-100/70 mt-2">{timeFrameRange.label}</p>
+        </motion.div>
+      </div>
+
+      {/* Insights and Trend */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8">
+        <div className="glass-panel rounded-2xl p-5">
+          <p className="text-xs uppercase tracking-wider text-cyan-200/70">Top expense category</p>
+          <p className="font-display text-2xl text-cyan-50 mt-2">{topExpenseCategory}</p>
+          <p className="text-sm text-cyan-100/70 mt-2">Focus here to improve savings quickly.</p>
+        </div>
+        <div className="glass-panel rounded-2xl p-5">
+          <p className="text-xs uppercase tracking-wider text-cyan-200/70">Savings rate</p>
+          <p className="font-display text-2xl text-cyan-50 mt-2">
+            {typeof overviewMeta.savingsRate === "number" ? (
+              <AnimatedValue value={overviewMeta.savingsRate} suffix="%" decimals={1} />
+            ) : "N/A"}
+          </p>
+          <p className="text-sm text-cyan-100/70 mt-2">Calculated from current timeframe totals.</p>
+        </div>
+        <div className="glass-panel rounded-2xl p-5">
+          <p className="text-xs uppercase tracking-wider text-cyan-200/70">Records in range</p>
+          <p className="font-display text-2xl text-cyan-50 mt-2">
+            <AnimatedValue value={filteredTransactions.length} />
+          </p>
+          <p className="text-sm text-cyan-100/70 mt-2">Income + expense entries in selected period.</p>
+        </div>
+      </div>
+
+      <div className="glass-panel rounded-2xl p-5 mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-display text-xl text-cyan-50">Cashflow Trend</h3>
+          <span className="text-xs text-cyan-100/70">{timeFrameRange.label}</span>
+        </div>
+        <div className="h-72">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={trendData}>
+              <defs>
+                <linearGradient id="incomeFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.45} />
+                  <stop offset="95%" stopColor="#22d3ee" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="expenseFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#fb923c" stopOpacity={0.38} />
+                  <stop offset="95%" stopColor="#fb923c" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(158,186,210,0.2)" />
+              <XAxis dataKey="label" stroke="#9ebad2" />
+              <YAxis stroke="#9ebad2" />
+              <Tooltip
+                cursor={{ stroke: "rgba(34,211,238,0.45)", strokeWidth: 1 }}
+                contentStyle={{
+                  background: "rgba(8, 20, 39, 0.96)",
+                  border: "1px solid rgba(34, 211, 238, 0.65)",
+                  borderRadius: "12px",
+                  boxShadow: "0 0 20px rgba(34,211,238,0.28)",
+                  color: "#dff8ff",
+                }}
+              />
+              <Area type="monotone" dataKey="income" stroke="#22d3ee" fill="url(#incomeFill)" strokeWidth={2.5} />
+              <Area type="monotone" dataKey="expense" stroke="#fb923c" fill="url(#expenseFill)" strokeWidth={2.5} />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       </div>
 
@@ -274,14 +397,29 @@ const Dashboard = () => {
                 paddingAngle={2} dataKey="value"
                 label={({ name, percent }) => `${name}: ${Math.round(percent * 100)}%`}
                 labelLine={false}
+                onMouseEnter={(_, index) => setActivePieIndex(index)}
+                onMouseLeave={() => setActivePieIndex(-1)}
+                isAnimationActive
+                animationDuration={650}
               >
                 {financialOverviewData.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="#fff" strokeWidth={2} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                    stroke={activePieIndex === index ? "#67e8f9" : "#fff"}
+                    strokeWidth={activePieIndex === index ? 3 : 2}
+                    opacity={activePieIndex === -1 || activePieIndex === index ? 1 : 0.55}
+                  />
                 ))}
               </Pie>
               <Tooltip
                 formatter={(value) => [`$${Math.round(value).toLocaleString()}`, "Amount"]}
-                contentStyle={dashboardStyles.tooltipContent}
+                contentStyle={{
+                  ...dashboardStyles.tooltipContent,
+                  border: "1px solid rgba(34, 211, 238, 0.65)",
+                  boxShadow: "0 0 22px rgba(34,211,238,0.3)",
+                  color: "#dff8ff",
+                }}
               />
               <Legend layout="horizontal" verticalAlign="bottom" align="center" iconSize={10} iconType="circle" />
             </PieChart>

@@ -1,6 +1,7 @@
 import React, { useState, useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, User, Mail, Lock, X, LogOut } from "lucide-react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -111,7 +112,12 @@ const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
     <div className={profileStyles.container}>
       <ToastContainer position="top-right" autoClose={2000} />
 
-      <div className={profileStyles.mainContainer}>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className={`${profileStyles.mainContainer} glass-panel`}
+      >
         {/* Header */}
         <div className={profileStyles.header}>
           <div className={profileStyles.avatar}>
@@ -156,7 +162,7 @@ const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
                       className={profileStyles.input}
                     />
                   ) : (
-                    <p className="text-gray-800 font-medium">{user?.name}</p>
+                    <p className="text-cyan-50 font-medium">{user?.name}</p>
                   )}
                 </div>
                 <div>
@@ -170,7 +176,7 @@ const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
                       className={profileStyles.input}
                     />
                   ) : (
-                    <p className="text-gray-800 font-medium">{user?.email}</p>
+                    <p className="text-cyan-50 font-medium">{user?.email}</p>
                   )}
                 </div>
               </div>
@@ -184,7 +190,7 @@ const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
               <div className="space-y-3">
                 <div className={profileStyles.securityItem}>
                   <div>
-                    <p className="font-medium text-gray-800">Password</p>
+                    <p className="font-medium text-cyan-50">Password</p>
                     <p className={profileStyles.securityText}>Last changed recently</p>
                   </div>
                   <button onClick={() => setShowPasswordModal(true)} className={profileStyles.changeButton}>
@@ -193,7 +199,7 @@ const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
                 </div>
                 <div className={profileStyles.securityItem}>
                   <div>
-                    <p className="font-medium text-gray-800">Account</p>
+                    <p className="font-medium text-cyan-50">Account</p>
                     <p className={profileStyles.securityText}>Member since {user?.joinDate ? new Date(user.joinDate).toLocaleDateString() : "N/A"}</p>
                   </div>
                 </div>
@@ -208,7 +214,7 @@ const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Password Modal */}
       {showPasswordModal && (

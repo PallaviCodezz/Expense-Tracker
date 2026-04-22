@@ -27,10 +27,13 @@ import { getAuthHeaders } from "../utils/auth.js";
 import AddTransactionModal from "../components/Add";
 import TransactionItem from "../components/TransactionItem";
 import TimeFrameSelector from "../components/TimeFrame";
-import FinancialCard from "../components/FinancialCard";
 import { getTimeFrameRange, generateChartPoints } from "../components/Helpers";
 import { INCOME_COLORS, CATEGORY_ICONS_Inc } from "../assets/color";
 import { incomeStyles as styles } from "../assets/dummyStyles";
+import PageHeader from "../components/ui/PageHeader";
+import SectionCard from "../components/ui/SectionCard";
+import StatTile from "../components/ui/StatTile";
+import ActionBar from "../components/ui/ActionBar";
 
 const API_BASE = "http://localhost:4000/api";
 
@@ -54,7 +57,7 @@ function toIsoWithClientTime(dateValue) {
 }
 
 const IncomeChart = ({ chartData, timeFrame, timeFrameRange }) => (
-  <div className={styles.chartContainer}>
+  <div className={`${styles.chartContainer} glass-panel`}>
     <div className={styles.chartHeaderContainer}>
       <h3 className={styles.chartTitle}>
         <BarChart2 className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
@@ -64,7 +67,7 @@ const IncomeChart = ({ chartData, timeFrame, timeFrameRange }) => (
             ? "Monthly"
             : "Daily"}{" "}
         Income Trends
-        <span className="text-sm text-gray-500 font-normal">
+        <span className="text-sm text-cyan-100/70 font-normal">
           {" "}
           ({timeFrameRange.label})
         </span>
@@ -85,19 +88,19 @@ const IncomeChart = ({ chartData, timeFrame, timeFrameRange }) => (
           </defs>
           <CartesianGrid
             strokeDasharray="3 3"
-            stroke="#f3f4f6"
+            stroke="rgba(158,186,210,0.2)"
             vertical={false}
           />
           <XAxis
             dataKey="label"
             axisLine={false}
             tickLine={false}
-            tick={{ fill: "#6b7280", fontSize: 12 }}
+            tick={{ fill: "#9ebad2", fontSize: 12 }}
           />
           <YAxis
             axisLine={false}
             tickLine={false}
-            tick={{ fill: "#6b7280", fontSize: 12 }}
+            tick={{ fill: "#9ebad2", fontSize: 12 }}
             width={50}
             tickFormatter={(value) => `$${value.toLocaleString()}`}
           />
@@ -488,15 +491,11 @@ const IncomePage = () => {
   }, [getAuthHeaders, filteredTransactions]);
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.headerContainer}>
-        <div className={styles.header}>
-          <div>
-            <h1 className={styles.headerTitle}>Income Overview</h1>
-            <p className={styles.headerSubtitle}>
-              Track and manage your income sources
-            </p>
-          </div>
+    <div className={`${styles.wrapper} pb-6`}>
+      <PageHeader
+        title="Income Overview"
+        subtitle="Track and manage your income sources"
+        rightContent={
           <button
             onClick={() => setShowModal(true)}
             className={styles.addButton}
@@ -505,70 +504,56 @@ const IncomePage = () => {
             <Plus size={18} className="md:size-5" />{" "}
             {loading ? "Processing..." : "Add Income"}
           </button>
-        </div>
-
-        <div className={styles.timeFrameContainer}>
-          <TimeFrameSelector
-            timeFrame={timeFrame}
-            setTimeFrame={setTimeFrame}
-            options={["daily", "weekly", "monthly", "yearly"]}
-            color="teal"
-          />
-        </div>
-      </div>
+        }
+        bottomContent={
+          <div className={styles.timeFrameContainer}>
+            <TimeFrameSelector
+              timeFrame={timeFrame}
+              setTimeFrame={setTimeFrame}
+              options={["daily", "weekly", "monthly", "yearly"]}
+              color="teal"
+            />
+          </div>
+        }
+      />
 
       <div className={styles.summaryGrid}>
-        <FinancialCard
-          icon={
-            <div className={styles.iconGreen}>
-              <DollarSign
-                className={`w-4 h-4 md:w-5 md:h-5 ${styles.textGreen}`}
-              />
-            </div>
-          }
+        <StatTile
+          icon={<div className={styles.iconGreen}><DollarSign className={`w-4 h-4 md:w-5 md:h-5 ${styles.textGreen}`} /></div>}
           label="Total Income"
           value={`$${Number(totalIncome || 0).toLocaleString()}`}
-          additionalContent={
-            <div className="mt-2 text-xs text-gray-500 flex items-center">
+          helper={
+            <div className="flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {timeFrameRange.label}
             </div>
           }
+          accent="border-emerald-400"
         />
 
-        <FinancialCard
-          icon={
-            <div className={styles.iconBlue}>
-              <BarChart2
-                className={`w-4 h-4 md:w-5 md:h-5 ${styles.textBlue}`}
-              />
-            </div>
-          }
+        <StatTile
+          icon={<div className={styles.iconBlue}><BarChart2 className={`w-4 h-4 md:w-5 md:h-5 ${styles.textBlue}`} /></div>}
           label="Average Income"
           value={`$${Number(averageIncome || 0).toLocaleString()}`}
-          additionalContent={
-            <div className="mt-2 text-xs text-gray-500 flex items-center">
+          helper={
+            <div className="flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {transactionsCount}{" "}
               transactions
             </div>
           }
+          accent="border-cyan-400"
         />
 
-        <FinancialCard
-          icon={
-            <div className={styles.iconPurple}>
-              <TrendingUp
-                className={`w-4 h-4 md:w-5 md:h-5 ${styles.textPurple}`}
-              />
-            </div>
-          }
+        <StatTile
+          icon={<div className={styles.iconPurple}><TrendingUp className={`w-4 h-4 md:w-5 md:h-5 ${styles.textPurple}`} /></div>}
           label="Transactions"
           value={transactionsCount}
-          additionalContent={
-            <div className="mt-2 text-xs text-gray-500 flex items-center">
+          helper={
+            <div className="flex items-center">
               <Calendar className="w-3 h-3 mr-1" />
               {filter === "all" ? "All records" : "Filtered records"}
             </div>
           }
+          accent="border-violet-400"
         />
       </div>
 
@@ -578,23 +563,27 @@ const IncomePage = () => {
         timeFrameRange={timeFrameRange}
       />
 
-      <div className={styles.listContainer}>
-        <div className={styles.header}>
-          <h3 className={styles.sectionTitle}>
-            <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
-            Income Transactions
-            <span className="text-sm text-gray-500 font-normal">
-              {" "}
-              ({timeFrameRange.label})
-            </span>
-          </h3>
-
-          <FilterSection
-            filter={filter}
-            setFilter={setFilter}
-            handleExport={handleExport}
-          />
-        </div>
+      <SectionCard className={styles.listContainer}>
+        <ActionBar
+          left={
+            <h3 className={styles.sectionTitle}>
+              <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
+              Income Transactions
+              <span className="text-sm text-cyan-100/70 font-normal">
+                {" "}
+                ({timeFrameRange.label})
+              </span>
+            </h3>
+          }
+          right={
+            <FilterSection
+              filter={filter}
+              setFilter={setFilter}
+              handleExport={handleExport}
+            />
+          }
+          className={styles.header}
+        />
 
         <div className={styles.transactionList}>
           {filteredTransactions
@@ -647,7 +636,7 @@ const IncomePage = () => {
             </div>
           )}
         </div>
-      </div>
+      </SectionCard>
 
       <AddTransactionModal
         showModal={showModal}

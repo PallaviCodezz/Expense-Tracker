@@ -36,6 +36,9 @@ const App = () => {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [authView, setAuthView] = useState("login"); // "login" | "signup"
+  const [themeMode, setThemeMode] = useState(
+    () => localStorage.getItem("themeMode") || "ocean"
+  );
 
   useEffect(() => {
     const { token: storedToken, user: storedUser } = getStoredAuth();
@@ -45,6 +48,15 @@ const App = () => {
     }
     setIsLoading(false);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("theme-neon", themeMode === "neon");
+    localStorage.setItem("themeMode", themeMode);
+  }, [themeMode]);
+
+  const toggleTheme = () => {
+    setThemeMode((prev) => (prev === "ocean" ? "neon" : "ocean"));
+  };
 
   const persistAuth = (userObj, tokenStr, remember = false) => {
     try {
@@ -100,6 +112,8 @@ const App = () => {
           <Login
             onLogin={handleLogin}
             onSwitchToSignup={() => setAuthView("signup")}
+            themeMode={themeMode}
+            onToggleTheme={toggleTheme}
           />
         ) : (
           <Signup
@@ -107,6 +121,8 @@ const App = () => {
             onSwitchToLogin={() => setAuthView("login")}
             persistAuth={persistAuth}
             fetchProfile={fetchProfile}
+            themeMode={themeMode}
+            onToggleTheme={toggleTheme}
           />
         )}
       </div>
@@ -118,7 +134,15 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Layout user={user} token={token} onLogout={handleLogout} />}
+          element={
+            <Layout
+              user={user}
+              token={token}
+              onLogout={handleLogout}
+              themeMode={themeMode}
+              onToggleTheme={toggleTheme}
+            />
+          }
         >
           <Route index element={<Dashboard />} />
           <Route path="income" element={<Income />} />

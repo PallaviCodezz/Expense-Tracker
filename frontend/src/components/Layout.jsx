@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
@@ -36,12 +37,13 @@ const filterTransactions = (transactions, frame) => {
   }
 };
 
-const Layout = ({ user, token, onLogout }) => {
+const Layout = ({ user, token, onLogout, themeMode, onToggleTheme }) => {
   const [transactions, setTransactions] = useState([]);
   const [timeFrame, setTimeFrame] = useState("monthly");
   const [loading, setLoading] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  const location = useLocation();
 
   const getHeaders = () => {
     const t = token || localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -98,8 +100,13 @@ const Layout = ({ user, token, onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar user={user} onLogout={onLogout} />
+    <div className="min-h-screen bg-transparent">
+      <Navbar
+        user={user}
+        onLogout={onLogout}
+        themeMode={themeMode}
+        onToggleTheme={onToggleTheme}
+      />
       <div className="flex">
         <Sidebar
           isCollapsed={sidebarCollapsed}
@@ -112,7 +119,17 @@ const Layout = ({ user, token, onLogout }) => {
             sidebarCollapsed ? "lg:ml-20" : "lg:ml-64"
           }`}
         >
-          <Outlet context={outletContext} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 14, scale: 0.99 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.995 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+            >
+              <Outlet context={outletContext} />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </div>

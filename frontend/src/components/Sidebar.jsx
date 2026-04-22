@@ -60,8 +60,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, user, onLogout }) => {
             <div className={styles.userInitials.base}>{initials}</div>
             {!isCollapsed && (
               <div className="mt-2">
-                <p className="font-semibold text-gray-800 truncate">{user?.name}</p>
-                <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                <p className="font-semibold text-cyan-100 truncate">{user?.name}</p>
+                <p className="text-xs text-cyan-100/60 truncate">{user?.email}</p>
               </div>
             )}
           </div>
@@ -129,8 +129,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, user, onLogout }) => {
               <div className={styles.mobileUserContainer}>
                 <div className={styles.userInitials.base}>{initials}</div>
                 <div>
-                  <p className="font-semibold text-gray-800">{user?.name}</p>
-                  <p className="text-xs text-gray-500">{user?.email}</p>
+                  <p className="font-semibold text-cyan-100">{user?.name}</p>
+                  <p className="text-xs text-cyan-100/60">{user?.email}</p>
                 </div>
               </div>
               <button onClick={() => setMobileOpen(false)} className={styles.mobileCloseButton}>

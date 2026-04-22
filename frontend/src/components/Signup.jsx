@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, User, DollarSign, ArrowLeft } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, User, DollarSign, ArrowLeft, Sparkles, Waves } from "lucide-react";
 import { signupStyles as styles } from "../assets/dummyStyles.js";
 
-const Signup = ({ onSignup, onSwitchToLogin }) => {
+const Signup = ({ onSignup, onSwitchToLogin, themeMode = "ocean", onToggleTheme }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +41,14 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
 
   return (
     <div className={styles.pageContainer}>
+      <button
+        type="button"
+        onClick={onToggleTheme}
+        className="fixed top-4 right-4 z-20 flex items-center gap-2 px-3 py-2 rounded-xl border border-cyan-700/40 bg-[#0f1c33]/85 text-cyan-100 hover:bg-cyan-900/40 transition-all"
+      >
+        {themeMode === "neon" ? <Sparkles className="w-4 h-4" /> : <Waves className="w-4 h-4" />}
+        <span className="text-xs font-medium">{themeMode === "neon" ? "Neon" : "Ocean"}</span>
+      </button>
       <div className={styles.cardContainer}>
         <div className={styles.header}>
           <button onClick={onSwitchToLogin} className={styles.backButton}>
@@ -65,7 +73,7 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className={`${styles.input} ${errors.name ? "border-red-400" : "border-gray-200"}`}
+                  className={`${styles.input} ${errors.name ? "border-red-400" : "border-cyan-900/50"}`}
                   placeholder="Your name"
                   disabled={isLoading}
                 />
@@ -81,7 +89,7 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`${styles.input} ${errors.email ? "border-red-400" : "border-gray-200"}`}
+                  className={`${styles.input} ${errors.email ? "border-red-400" : "border-cyan-900/50"}`}
                   placeholder="you@example.com"
                   disabled={isLoading}
                 />
@@ -97,7 +105,7 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`${styles.passwordInput} ${errors.password ? "border-red-400" : "border-gray-200"}`}
+                  className={`${styles.passwordInput} ${errors.password ? "border-red-400" : "border-cyan-900/50"}`}
                   placeholder="••••••••"
                   disabled={isLoading}
                 />

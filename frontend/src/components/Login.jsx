@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, DollarSign } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, DollarSign, Sparkles, Waves } from "lucide-react";
 import { loginStyles as styles } from "../assets/dummyStyles.js";
 
-const Login = ({ onLogin, onSwitchToSignup }) => {
+const Login = ({ onLogin, onSwitchToSignup, themeMode = "ocean", onToggleTheme }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +33,14 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
 
   return (
     <div className={styles.pageContainer}>
+      <button
+        type="button"
+        onClick={onToggleTheme}
+        className="fixed top-4 right-4 z-20 flex items-center gap-2 px-3 py-2 rounded-xl border border-cyan-700/40 bg-[#0f1c33]/85 text-cyan-100 hover:bg-cyan-900/40 transition-all"
+      >
+        {themeMode === "neon" ? <Sparkles className="w-4 h-4" /> : <Waves className="w-4 h-4" />}
+        <span className="text-xs font-medium">{themeMode === "neon" ? "Neon" : "Ocean"}</span>
+      </button>
       <div className={styles.cardContainer}>
         <div className={styles.header}>
           <div className={styles.avatar}>

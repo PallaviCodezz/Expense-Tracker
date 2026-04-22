@@ -29,6 +29,10 @@ import AddTransactionModal from "../components/Add";
 import { getTimeFrameRange, generateChartPoints } from "../components/Helpers";
 import { CATEGORY_ICONS } from "../assets/color";
 import { expensePageStyles as styles } from "../assets/dummyStyles";
+import PageHeader from "../components/ui/PageHeader";
+import SectionCard from "../components/ui/SectionCard";
+import StatTile from "../components/ui/StatTile";
+import ActionBar from "../components/ui/ActionBar";
 
 const API_BASE = "http://localhost:4000/api";
 
@@ -364,13 +368,11 @@ const ExpensePage = () => {
 
 
   return (
-    <div className={styles.container}>
-      <div className={styles.headerCard}>
-        <div className={styles.headerContainer}>
-          <div>
-            <h1 className={styles.headerTitle}>Expense Overview</h1>
-            <p className={styles.headerSubtitle}>Track and manage your expenses</p>
-          </div>
+    <div className={`${styles.container} pb-6`}>
+      <PageHeader
+        title="Expense Overview"
+        subtitle="Track and manage your expenses"
+        rightContent={
           <button
             onClick={() => setShowModal(true)}
             className={styles.addButton}
@@ -378,77 +380,67 @@ const ExpensePage = () => {
           >
             <Plus size={20} /> {loading ? "Processing..." : "Add Expense"}
           </button>
-        </div>
-
-        <div className={styles.timeframePositioning}>
-          <TimeFrameSelector
-            timeFrame={timeFrame}
-            setTimeFrame={(frame) => {
-              setTimeFrame(frame);
-              setSelectedMonth(null);
-            }}
-            options={["daily", "weekly", "monthly", "yearly"]}
-            color="orange"
-          />
-        </div>
-      </div>
+        }
+        bottomContent={
+          <div className={styles.timeframePositioning}>
+            <TimeFrameSelector
+              timeFrame={timeFrame}
+              setTimeFrame={(frame) => {
+                setTimeFrame(frame);
+                setSelectedMonth(null);
+              }}
+              options={["daily", "weekly", "monthly", "yearly"]}
+              color="orange"
+            />
+          </div>
+        }
+        className={styles.headerCard}
+      />
 
       <div className={styles.cardsGrid}>
-        <FinancialCard
-          icon={
-            <div className={styles.iconOrange}>
-              <DollarSign className={`w-5 h-5 ${styles.textOrange}`} />
-            </div>
-          }
+        <StatTile
+          icon={<div className={styles.iconOrange}><DollarSign className={`w-5 h-5 ${styles.textOrange}`} /></div>}
           label="Total Expenses"
           value={`$${totalExpense.toLocaleString()}`}
-          additionalContent={
-            <div className="mt-2 text-xs text-gray-500 flex items-center">
+          helper={
+            <div className="flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {timeFrameRange.label}
             </div>
           }
-          borderColor={styles.borderOrange}
+          accent="border-orange-400"
         />
 
-        <FinancialCard
-          icon={
-            <div className={styles.iconAmber}>
-              <BarChart2 className={`w-5 h-5 ${styles.textAmber}`} />
-            </div>
-          }
+        <StatTile
+          icon={<div className={styles.iconAmber}><BarChart2 className={`w-5 h-5 ${styles.textAmber}`} /></div>}
           label="Average Expense"
           value={`$${averageExpense.toLocaleString()}`}
-          additionalContent={
-            <div className="mt-2 text-xs text-gray-500 flex items-center">
+          helper={
+            <div className="flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {filteredTransactions.length} transactions
             </div>
           }
-          borderColor={styles.borderAmber}
+          accent="border-amber-400"
         />
 
-        <FinancialCard
-          icon={
-            <div className={styles.iconYellow}>
-              <TrendingDown className={`w-5 h-5 ${styles.textYellow}`} />
-            </div>
-          }
+        <StatTile
+          icon={<div className={styles.iconYellow}><TrendingDown className={`w-5 h-5 ${styles.textYellow}`} /></div>}
           label="Transactions"
           value={filteredTransactions.length}
-          additionalContent={
-            <div className="mt-2 text-xs text-gray-500 flex items-center">
+          helper={
+            <div className="flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {filter === "all" ? "All records" : "Filtered records"}
             </div>
           }
-          borderColor={styles.borderYellow}
+          accent="border-yellow-400"
         />
       </div>
 
-      <div className={styles.chartContainer}>
+      <div className={`${styles.chartContainer} glass-panel`}>
         <div className={styles.chartHeader}>
           <h3 className={styles.chartTitle}>
             <BarChart2 className="w-6 h-6 text-orange-500" />
             {timeFrame === "daily" ? "Hourly" : timeFrame === "yearly" ? "Monthly" : "Daily"} Expense Trends
-            <span className="text-sm text-gray-500 font-normal"> ({timeFrameRange.label})</span>
+            <span className="text-sm text-cyan-100/70 font-normal"> ({timeFrameRange.label})</span>
           </h3>
 
           <button
@@ -468,12 +460,12 @@ const ExpensePage = () => {
                   <stop offset="95%" stopColor="#ff9800" stopOpacity={0.1} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false} />
-              <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#6b7280", fontSize: 12 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(158,186,210,0.2)" vertical={false} />
+              <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#9ebad2", fontSize: 12 }} />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "#6b7280", fontSize: 12 }}
+                tick={{ fill: "#9ebad2", fontSize: 12 }}
                 width={60}
                 tickFormatter={(value) => `$${value.toLocaleString()}`}
               />
@@ -506,43 +498,47 @@ const ExpensePage = () => {
         </div>
       </div>
 
-      <div className={styles.transactionsContainer}>
-        <div className={styles.transactionsHeader}>
-          <h3 className={styles.transactionsTitle}>
-            <DollarSign className="w-6 h-6 -mx-1.5 lg:-mx-2 md:-mx-0 text-orange-500" />
-            Expense Transactions
-            <span className="text-sm text-gray-500 font-normal"> ({timeFrameRange.label})</span>
-          </h3>
+      <SectionCard className={styles.transactionsContainer}>
+        <ActionBar
+          className={styles.transactionsHeader}
+          left={
+            <h3 className={styles.transactionsTitle}>
+              <DollarSign className="w-6 h-6 -mx-1.5 lg:-mx-2 md:-mx-0 text-orange-500" />
+              Expense Transactions
+              <span className="text-sm text-cyan-100/70 font-normal"> ({timeFrameRange.label})</span>
+            </h3>
+          }
+          right={
+            <div className="flex flex-col sm:flex-row gap-2 md:gap-3 w-full sm:w-auto">
+              <div className="relative w-full sm:w-auto">
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  className={styles.filterSelect}
+                >
+                  <option value="all">All Transactions</option>
+                  <option value="month">This Month</option>
+                  <option value="year">This Year</option>
+                  <option value="Food">Food</option>
+                  <option value="Housing">Housing</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Shopping">Shopping</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 md:gap-3 w-full sm:w-auto">
-            <div className="relative w-full sm:w-auto">
-              <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                className={styles.filterSelect}
+              <button
+                onClick={handleExport}
+                className={styles.exportButton}
               >
-                <option value="all">All Transactions</option>
-                <option value="month">This Month</option>
-                <option value="year">This Year</option>
-                <option value="Food">Food</option>
-                <option value="Housing">Housing</option>
-                <option value="Transport">Transport</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Healthcare">Healthcare</option>
-                <option value="Other">Other</option>
-              </select>
+                <Download size={18} /> Export
+              </button>
             </div>
-
-            <button
-              onClick={handleExport}
-              className={styles.exportButton}
-            >
-              <Download size={18} /> Export
-            </button>
-          </div>
-        </div>
+          }
+        />
 
         <div className={styles.transactionsList}>
           {filteredTransactions
@@ -593,7 +589,7 @@ const ExpensePage = () => {
             </div>
           )}
         </div>
-      </div>
+      </SectionCard>
 
       <AddTransactionModal
         showModal={showModal}

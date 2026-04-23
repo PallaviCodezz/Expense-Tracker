@@ -23,11 +23,11 @@ const GaugeCard = ({
   // Determine colors based on whether value is negative
   const gradientStart = isNegative ? '#ef4444' : (colorInfo.gradientStart || '#00C49F');
   const gradientEnd = isNegative ? '#dc2626' : (colorInfo.gradientEnd || '#0088FE');
-  const textColor = isNegative ? 'text-red-600' : (colorInfo.text || 'text-gray-800');
-  const percentColor = isNegative ? 'text-red-500' : 'text-gray-500';
+  const textColor = isNegative ? 'text-red-400' : (colorInfo.text || 'text-cyan-50');
+  const percentColor = isNegative ? 'text-red-400' : 'text-cyan-100/70';
 
   return (
-    <div className="bg-white rounded-xl p-5 -mx-3 lg:-mx-0 md:-mx-5 shadow-sm flex flex-col items-center border border-gray-100">
+    <div className="bg-[#0f1c33] rounded-xl p-5 -mx-3 lg:-mx-0 md:-mx-5 shadow-sm flex flex-col items-center border border-cyan-900/40">
       <h3 className={`text-lg font-semibold mb-4 ${textColor}`}>
         {name}
       </h3>
@@ -63,7 +63,9 @@ const GaugeCard = ({
               y="50%" 
               textAnchor="middle" 
               dominantBaseline="middle"
-              className={`text-2xl font-bold ${textColor}`}
+              fill={isNegative ? "#f87171" : "#e8f7ff"}
+              fontSize="18"
+              fontWeight="bold"
             >
               {isNegative ? '-' : ''}${Math.round(absValue).toLocaleString()}
             </text>
@@ -72,7 +74,8 @@ const GaugeCard = ({
               y="65%" 
               textAnchor="middle" 
               dominantBaseline="middle"
-              className={`text-sm ${percentColor}`}
+              fill={isNegative ? "#f87171" : "#9ebad2"}
+              fontSize="13"
             >
               {Math.round(percentage)}%
             </text>
@@ -88,11 +91,11 @@ const GaugeCard = ({
       </div>
       <div className="text-center mt-3">
         {isNegative && highlightNegative && (
-          <p className="text-sm text-red-600 font-semibold mb-1">
+          <p className="text-sm text-red-400 font-semibold mb-1">
             Negative savings
           </p>
         )}
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-cyan-100/70">
           {timeFrameLabel} data
         </p>
       </div>

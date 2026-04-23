@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
@@ -30,7 +30,10 @@ const filterTransactions = (transactions, frame) => {
     }
     case "monthly":
       return transactions.filter(
-        (t) => new Date(t.date).getMonth() === now.getMonth()
+        (t) => {
+          const d = new Date(t.date);
+          return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        }
       );
     default:
       return transactions;

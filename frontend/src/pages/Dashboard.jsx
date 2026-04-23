@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -12,7 +12,7 @@ import axios from "axios";
 import GaugeCard from "../components/GaugeCard.jsx";
 import TimeFrameSelector from "../components/TimeFrame.jsx";
 import AddTransactionModal from "../components/Add.jsx";
-import { getTimeFrameRange, getPreviousTimeFrameRange } from "../components/Helpers.jsx";
+import { getTimeFrameRange } from "../components/Helpers.jsx";
 import {
   COLORS, GAUGE_COLORS,
   INCOME_CATEGORY_ICONS, EXPENSE_CATEGORY_ICONS,
@@ -104,7 +104,6 @@ const Dashboard = () => {
   });
 
   const timeFrameRange = useMemo(() => getTimeFrameRange(timeFrame), [timeFrame]);
-  const prevTimeFrameRange = useMemo(() => getPreviousTimeFrameRange(timeFrame), [timeFrame]);
 
   const isDateInRange = (date, start, end) => {
     const d = new Date(date);
@@ -118,20 +117,10 @@ const Dashboard = () => {
     [outletTransactions, timeFrameRange]
   );
 
-  const prevFilteredTransactions = useMemo(
-    () => outletTransactions.filter((t) => isDateInRange(t.date, prevTimeFrameRange.start, prevTimeFrameRange.end)),
-    [outletTransactions, prevTimeFrameRange]
-  );
-
   const currentData = useMemo(() => {
     const d = calculateData(filteredTransactions);
     return { ...d, savings: d.income - d.expenses };
   }, [filteredTransactions]);
-
-  const prevData = useMemo(() => {
-    const d = calculateData(prevFilteredTransactions);
-    return { ...d, savings: d.income - d.expenses };
-  }, [prevFilteredTransactions]);
 
   useEffect(() => {
     const maxValues = {

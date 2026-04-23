@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Save, X, Edit, Trash2 } from "lucide-react";
-import { colorClasses, transactionItemStyles } from "../assets/color.jsx";
+import { colorClasses } from "../assets/color.jsx";
 
 const TransactionItem = ({
   transaction,
@@ -41,7 +41,7 @@ const TransactionItem = ({
   const IconComponent = categoryIcons?.[transaction.category] || null;
 
   return (
-    <div className={`flex flex-col md:flex-row items-stretch justify-between gap-3 p-4 rounded-xl border border-gray-100 mb-3 last:mb-0 ${isEditing ? classes.bg : "hover:bg-gray-50"}`}>
+    <div className={`flex flex-col md:flex-row items-stretch justify-between gap-3 p-4 rounded-xl border border-cyan-900/40 mb-3 last:mb-0 ${isEditing ? classes.bg : "hover:bg-cyan-900/20"}`}>
       {/* Left: icon + description */}
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <div className={`${iconClass} ${classes.iconBg}`}>
@@ -54,7 +54,7 @@ const TransactionItem = ({
                 type="text"
                 value={editForm.description}
                 onChange={(e) => setEditForm((prev) => ({ ...prev, description: e.target.value }))}
-                className={`w-full bg-white rounded-lg px-3 py-2 focus:outline-none focus:ring-1 border ${errors.description ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`}
+                className={`w-full bg-[#09162b] text-cyan-50 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 border ${errors.description ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`}
                 placeholder="Description"
               />
               {errors.description && <p className="text-xs text-red-600 mt-1">{errors.description}</p>}
@@ -62,7 +62,7 @@ const TransactionItem = ({
                 <select
                   value={editForm.category}
                   onChange={(e) => setEditForm((prev) => ({ ...prev, category: e.target.value }))}
-                  className={`bg-white rounded-lg px-2 py-1 text-sm border focus:outline-none ${classes.border}`}
+                  className={`bg-[#09162b] text-cyan-50 rounded-lg px-2 py-1 text-sm border focus:outline-none ${classes.border}`}
                 >
                   {type === "income"
                     ? ["Salary", "Freelance", "Investment", "Bonus", "Other"].map((c) => <option key={c}>{c}</option>)
@@ -73,14 +73,14 @@ const TransactionItem = ({
                   type="date"
                   value={editForm.date ? new Date(editForm.date).toISOString().split("T")[0] : ""}
                   onChange={(e) => setEditForm((prev) => ({ ...prev, date: e.target.value }))}
-                  className={`bg-white rounded-lg px-2 py-1 text-sm border focus:outline-none ${classes.border}`}
+                  className={`bg-[#09162b] text-cyan-50 rounded-lg px-2 py-1 text-sm border focus:outline-none ${classes.border}`}
                 />
               </div>
             </>
           ) : (
             <>
-              <p className="font-medium text-gray-800 truncate">{transaction.description}</p>
-              <p className="text-xs text-gray-500 mt-1">{transaction.category} · {new Date(transaction.date).toLocaleDateString()}</p>
+              <p className="font-medium text-cyan-50 truncate">{transaction.description}</p>
+              <p className="text-xs text-cyan-100/70 mt-1">{transaction.category} · {new Date(transaction.date).toLocaleDateString()}</p>
             </>
           )}
         </div>
@@ -95,7 +95,7 @@ const TransactionItem = ({
                 type="number"
                 value={editForm.amount}
                 onChange={(e) => setEditForm((prev) => ({ ...prev, amount: e.target.value }))}
-                className={`w-full max-w-[120px] bg-white rounded-lg px-3 py-2 focus:outline-none focus:ring-1 border ${errors.amount ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`}
+                className={`w-full max-w-[120px] bg-[#09162b] text-cyan-50 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 border ${errors.amount ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`}
               />
               {errors.amount && <p className="text-xs text-red-600 mt-1">{errors.amount}</p>}
             </>
@@ -110,7 +110,7 @@ const TransactionItem = ({
           {isEditing ? (
             <>
               <button onClick={handleSaveClick} className={`p-2 ${classes.button} rounded-lg`} title="Save"><Save size={16} /></button>
-              <button onClick={() => { setErrors({ description: "", amount: "" }); onCancel(); }} className="p-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400" title="Cancel"><X size={16} /></button>
+              <button onClick={() => { setErrors({ description: "", amount: "" }); onCancel(); }} className="p-2 bg-[#1a2f4a] text-cyan-100 rounded-lg hover:bg-[#233855]" title="Cancel"><X size={16} /></button>
             </>
           ) : (
             <>

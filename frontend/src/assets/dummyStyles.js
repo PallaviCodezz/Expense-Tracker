@@ -67,30 +67,30 @@ export const dashboardStyles = {
   
   // Transaction item styles
   transactionList: "space-y-3",
-  incomeTransactionItem: "flex items-center px-2 mx-2 my-2 md:p-4 md:mx-2 lg:px-3 justify-between p-3 bg-green-50 rounded-lg",
-  expenseTransactionItem: "flex items-center justify-between mx-1 p-3 lg:p-3 md:p-4 md:mx-2 bg-orange-50 rounded-lg",
+  incomeTransactionItem: "flex items-center px-2 mx-2 my-2 md:p-4 md:mx-2 lg:px-3 justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg",
+  expenseTransactionItem: "flex items-center justify-between mx-1 p-3 lg:p-3 md:p-4 md:mx-2 bg-orange-500/10 border border-orange-500/20 rounded-lg",
   
   // Transaction icon container
-  incomeIconContainer: "p-2 bg-green-100 rounded-lg",
-  expenseIconContainer: "p-2 bg-orange-100 rounded-lg",
+  incomeIconContainer: "p-2 bg-green-500/20 rounded-lg",
+  expenseIconContainer: "p-2 bg-orange-500/20 rounded-lg",
   
   // Transaction content
   transactionContent: "flex items-center lg:gap-3 md:gap-3 gap-1",
   transactionDescription: "font-medium text-cyan-50",
-  transactionCategory: "text-sm text-cyan-100/70",
+  transactionCategory: "text-sm text-cyan-100/60",
   transactionAmount: "text-right",
-  incomeAmount: "font-bold text-green-600",
-  expenseAmount: "font-bold text-orange-600",
-  transactionDate: "text-sm text-cyan-100/70",
+  incomeAmount: "font-bold text-green-400",
+  expenseAmount: "font-bold text-orange-400",
+  transactionDate: "text-sm text-cyan-100/60",
   
   // Empty state styles
   emptyState: "text-center py-8",
   emptyIconContainer: (color) => `w-16 h-16 mx-auto mb-4 rounded-full ${color} flex items-center justify-center`,
-  emptyText: "text-cyan-100/80 font-medium",
+  emptyText: "text-cyan-100/70 font-medium",
   
   // View all button styles
-  viewAllContainer: "pt-4 border-t border-gray-100",
-  viewAllButton: "w-full flex items-center justify-center gap-2 py-3 text-teal-600 font-medium hover:bg-teal-50 rounded-xl transition-colors",
+  viewAllContainer: "pt-4 border-t border-cyan-900/40",
+  viewAllButton: "w-full flex items-center justify-center gap-2 py-3 text-teal-400 font-medium hover:bg-teal-500/10 rounded-xl transition-colors",
   
   // Icon container styles
   iconContainer: (color) => `p-2 ${color} rounded-lg`,
@@ -114,41 +114,40 @@ export const chartStyles = {
   pieChart: "lg:-px-5 lg:text-xs xl:text-xl",
 };
 
-// Add to existing dummyStyles.js
 export const incomeStyles = {
   // Layout
   wrapper: "space-y-4 md:space-y-6 p-3 md:p-4 max-w-7xl mx-auto",
-  headerContainer: "bg-white rounded-lg md:rounded-xl p-4 -mx-7 lg:-mx-7 overflow-x-hidden md:p-6 mb-6 md:mb-8 shadow",
+  headerContainer: "bg-[#0f1c33]/95 rounded-lg md:rounded-xl p-4 -mx-7 lg:-mx-7 overflow-x-hidden md:p-6 mb-6 md:mb-8 shadow-sm border border-cyan-900/40",
   header: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6",
-  headerTitle: "text-xl md:text-2xl lg:text-3xl font-bold text-gray-800",
-  headerSubtitle: "text-gray-600 mt-1 text-sm md:text-base",
+  headerTitle: "text-xl md:text-2xl lg:text-3xl font-bold text-cyan-50",
+  headerSubtitle: "text-cyan-100/70 mt-1 text-sm md:text-base",
   addButton: "flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-3 py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl transition-all shadow-md hover:shadow-lg font-medium text-sm md:text-base",
   
   // Summary Cards
   summaryGrid: "grid grid-cols-1 -mx-4 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5",
   
   // Chart
-  chartContainer: "hidden md:block -mx-7 bg-white rounded-xl p-6 shadow-sm border border-gray-100",
-  chartTitle: "text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-5 flex items-center gap-2 md:gap-3",
+  chartContainer: "hidden md:block -mx-7 bg-[#0f1c33]/95 lg:-mx-0 md:-mx-0 rounded-xl p-6 shadow-sm border border-cyan-900/40",
+  chartTitle: "text-lg md:text-xl font-bold text-cyan-50 mb-4 md:mb-5 flex items-center gap-2 md:gap-3",
   
   // Transaction List
-  listContainer: "bg-white rounded-xl -mx-7 md:rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 relative overflow-hidden",
-  sectionTitle: "text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-5 flex items-center gap-2 md:gap-3",
+  listContainer: "bg-[#0f1c33]/95 rounded-2xl p-4 md:p-6 -mx-4 lg:-mx-0 md:-mx-0 shadow-sm border border-cyan-900/40 relative overflow-hidden",
+  sectionTitle: "text-lg md:text-xl font-bold text-cyan-50 mb-4 md:mb-5 flex items-center gap-2 md:gap-3",
   
   // Filter Section
   filterContainer: "flex flex-col sm:flex-row gap-2 md:gap-3 w-full sm:w-auto",
-  filterSelect: "appearance-none bg-white border border-gray-300 rounded-lg pl-3 pr-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-full",
-  exportButton: "flex items-center justify-center gap-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-lg transition-all text-sm hover:shadow-md w-full sm:w-auto",
+  filterSelect: "appearance-none bg-[#0f1c33] text-cyan-100 border border-cyan-900/50 rounded-lg pl-3 pr-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-full",
+  exportButton: "flex items-center justify-center gap-1 bg-[#0f1c33] border border-cyan-900/50 hover:bg-[#1a2f4a] text-cyan-100 px-3 py-2 rounded-lg transition-all text-sm hover:shadow-md w-full sm:w-auto",
   
   // Transaction Items
   transactionList: "space-y-3 -mx-3 lg:-mx-0 md:-mx-0",
-  viewAllButton: "mt-4 w-full text-center py-3 text-green-600 font-medium hover:bg-green-50 rounded-xl transition-colors flex items-center justify-center gap-2",
+  viewAllButton: "mt-4 w-full text-center py-3 text-green-400 font-medium hover:bg-green-500/10 rounded-xl transition-colors flex items-center justify-center gap-2",
   
   // Empty State
   emptyStateContainer: "text-center py-6 md:py-8",
-  emptyStateIcon: "w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full bg-green-50 flex items-center justify-center",
-  emptyStateText: "text-gray-600 font-medium text-sm md:text-base",
-  emptyStateSubtext: "text-xs md:text-sm text-gray-500 mt-1 md:mt-2",
+  emptyStateIcon: "w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full bg-green-500/10 flex items-center justify-center",
+  emptyStateText: "text-cyan-100/80 font-medium text-sm md:text-base",
+  emptyStateSubtext: "text-xs md:text-sm text-cyan-100/50 mt-1 md:mt-2",
   emptyStateButton: "mt-3 md:mt-4 flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-lg md:rounded-xl transition-all shadow-md hover:shadow-lg mx-auto text-sm md:text-base",
   
   // Time Frame Selector Container
@@ -162,12 +161,12 @@ export const incomeStyles = {
   
   // Chart tooltip styles 
   tooltipContent: {
-    backgroundColor: "rgba(255, 255, 255, 0.95)",
-    border: "1px solid #e5e7eb",
+    backgroundColor: "rgba(12, 23, 42, 0.95)",
+    border: "1px solid #1f3b60",
     borderRadius: "0.75rem",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
     padding: "12px",
-    backdropFilter: "blur(4px)",
+    color: "#dff8ff",
   },
   
   // Icon container styles for summary cards 
@@ -181,7 +180,7 @@ export const incomeStyles = {
   textPurple: "text-purple-600",
   
   // Filter icon positioning 
-  filterIcon: "absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-500 pointer-events-none",
+  filterIcon: "absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-cyan-100/60 pointer-events-none",
   
   // FinancialCard border colors (if needed, similar to expense page)
   borderGreen: "border-l-4 border-green-500",
@@ -194,35 +193,35 @@ export const expensePageStyles = {
   container: "space-y-6 max-w-7xl",
   
   // Header card
-  headerCard: "bg-white rounded-xl p-4  lg:-mx-0 -mx-3.5  overflow-x-hidden mb-8 shadow",
+  headerCard: "bg-[#0f1c33]/95 rounded-xl p-4  lg:-mx-0 -mx-3.5  overflow-x-hidden mb-8 shadow-sm border border-cyan-900/40",
   headerContainer: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6",
-  headerTitle: "text-2xl md:text-3xl font-bold text-gray-800",
-  headerSubtitle: "text-gray-600 mt-1",
+  headerTitle: "text-2xl md:text-3xl font-bold text-cyan-50",
+  headerSubtitle: "text-cyan-100/70 mt-1",
   addButton: "flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-4 py-3 rounded-xl transition-all shadow-md hover:shadow-lg font-medium",
   
   // Financial cards grid
   cardsGrid: "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-5",
   
   // Chart container
-  chartContainer: "hidden md:block bg-white rounded-xl p-4 -mx-7 lg:-mx-0 shadow-sm border border-gray-100",
+  chartContainer: "hidden md:block bg-[#0f1c33]/95 rounded-xl p-4 -mx-7 lg:-mx-0 shadow-sm border border-cyan-900/40",
   chartHeader: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-5",
-  chartTitle: "text-xl font-bold text-gray-800 mb-5 flex items-center gap-3",
-  exportButton: "flex items-center gap-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg transition-all text-sm hover:shadow-md",
+  chartTitle: "text-xl font-bold text-cyan-50 mb-5 flex items-center gap-3",
+  exportButton: "flex items-center gap-1 bg-[#0f1c33] border border-cyan-900/50 hover:bg-[#1a2f4a] text-cyan-100 px-4 py-2 rounded-lg transition-all text-sm hover:shadow-md",
   chart: "h-80",
   
   // Transactions container
-  transactionsContainer: "bg-white rounded-2xl p-5 -mx-4 lg:-mx-0 md:-mx-5 shadow-sm border border-gray-100 relative overflow-hidden",
+  transactionsContainer: "bg-[#0f1c33]/95 rounded-2xl p-5 -mx-4 lg:-mx-0 md:-mx-5 shadow-sm border border-cyan-900/40 relative overflow-hidden",
   transactionsHeader: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-5",
-  transactionsTitle: "text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-5 flex items-center gap-2 md:gap-3",
-  filterSelect: "appearance-none bg-white border border-gray-300 rounded-lg pl-3 pr-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-full",
+  transactionsTitle: "text-lg md:text-xl font-bold text-cyan-50 mb-4 md:mb-5 flex items-center gap-2 md:gap-3",
+  filterSelect: "appearance-none bg-[#0f1c33] text-cyan-100 border border-cyan-900/50 rounded-lg pl-3 pr-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-full",
   
   // Transaction items
   transactionsList: "space-y-3 -mx-2 lg:-mx-0 md:-mx-0",
-  viewAllButton: "mt-4 w-full text-center py-3 text-orange-600 font-medium hover:bg-amber-50 rounded-xl transition-colors flex items-center justify-center gap-2",
+  viewAllButton: "mt-4 w-full text-center py-3 text-orange-400 font-medium hover:bg-orange-500/10 rounded-xl transition-colors flex items-center justify-center gap-2",
   emptyState: "text-center py-8",
-  emptyStateIcon: "w-16 h-16 mx-auto mb-4 rounded-full bg-orange-50 flex items-center justify-center",
-  emptyStateText: "text-gray-600 font-medium",
-  emptyStateSubtext: "text-sm text-gray-500 mt-2",
+  emptyStateIcon: "w-16 h-16 mx-auto mb-4 rounded-full bg-orange-500/10 flex items-center justify-center",
+  emptyStateText: "text-cyan-100/80 font-medium",
+  emptyStateSubtext: "text-sm text-cyan-100/50 mt-2",
   
   // Icons
   iconOrange: "p-2 bg-orange-100 rounded-lg",
@@ -238,8 +237,8 @@ export const expensePageStyles = {
   borderYellow: "border-l-4 border-yellow-500",
   // Chart tooltip styles 
   tooltipContent: {
-    backgroundColor: "rgba(255, 255, 255, 0.95)",
-    border: "1px solid #e5e7eb",
+    backgroundColor: "rgba(12, 23, 42, 0.95)",
+    border: "1px solid #1f3b60",
     borderRadius: "0.75rem",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
     padding: "12px",
@@ -249,21 +248,10 @@ export const expensePageStyles = {
   // Chart height style 
   chartHeight: "h-80",
   
-  // Export button for chart header (different from existing exportButton)
-  chartExportButton: "flex items-center gap-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg transition-all text-sm hover:shadow-md",
-  
-  // Additional empty state style 
-  emptyStateSubtext: "text-sm text-gray-500 mt-2",
-  
-  // Timeframe positioning 
-  timeframePositioning: "flex px-10 -mx-14 justify-center lg:-mx-0 md:-mx-0 lg:justify-end md:justify-end mt-4",
-  
   // Transaction item specific styles 
-  transactionItemContainer: "flex items-center justify-between p-3 -mx-2 hover:bg-amber-50 rounded-xl transition-all duration-300 border border-gray-100 cursor-pointer mb-3 group",
+  transactionItemContainer: "flex items-center justify-between p-3 -mx-2 hover:bg-amber-50 rounded-xl transition-all duration-300 border border-cyan-900/40 cursor-pointer mb-3 group",
   transactionAmount: "font-bold",
   transactionIcon: "lg:p-3 md:p-3 p-1 rounded-lg",
-
-  
 };
 
 export const profileStyles = {
@@ -312,321 +300,253 @@ export const profileStyles = {
   passwordToggle: "absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600",
   
   // Error text
-  errorText: "mt-1 text-sm text-red-600"
-};
-
-// Add to existing dummyStyles.js
-export const modalStyles = {
-  // Modal container
-  overlay: "fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50",
-  modalContainer: "bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl",
+  errorText: "mt-1 text-sm text-red-600",
   
-  // Header
-  modalHeader: "flex justify-between items-center mb-4",
-  modalTitle: "text-xl font-bold text-gray-800",
-  closeButton: "text-gray-500 hover:text-gray-800",
-  
-  // Form elements
-  form: "space-y-4",
-  label: "block text-sm font-medium text-gray-700 mb-1",
-  input: (ringColor) => `w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${ringColor}`,
-  
-  // Type buttons
-  typeButtonContainer: "flex gap-4",
-  typeButton: (isSelected, color) => 
-    `flex-1 py-2 rounded-lg font-medium ${
-      isSelected 
-        ? `${color} text-white shadow-md` 
-        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-    }`,
-  
-  // Submit button
-  submitButton: (color) => `w-full text-white py-3 rounded-lg font-medium mt-4 shadow-md hover:shadow-lg transition-all ${color}`,
-  
-  // Color classes
-  colorClasses: {
-    teal: {
-      button: "bg-teal-500 hover:bg-teal-600",
-      ring: "focus:ring-teal-500",
-      typeButtonSelected: "bg-teal-500",
-    },
-    orange: {
-      button: "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600",
-      ring: "focus:ring-orange-500",
-      typeButtonSelected: "bg-orange-500",
-    },
-  },
-};
-
-
-
-// In src/assets/dummyStyles.js - add these styles
-export const loginStyles = {
-  // Page container
-  pageContainer: "min-h-screen flex items-center justify-center p-4 bg-transparent",
-  
-  // Card container
-  cardContainer: "w-full max-w-md bg-[#0f1c33]/95 rounded-3xl shadow-2xl overflow-hidden border border-cyan-900/50",
-  
-  // Header styles
-  header: "bg-gradient-to-r from-cyan-500 to-teal-500 p-6 text-center",
-  avatar: "w-20 h-20 mx-auto rounded-full bg-slate-900/25 flex items-center justify-center mb-4",
-  headerTitle: "font-display text-2xl font-bold text-slate-950",
-  headerSubtitle: "text-slate-900/70 mt-2",
-  
-  // Form container
-  formContainer: "p-8",
-  
-  // Error message
-  errorContainer: "mb-6 p-3 bg-red-500/10 text-red-300 rounded-lg flex items-center border border-red-500/30",
-  errorIcon: "w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center mr-3",
-  errorText: "break-words",
-  
-  // Form elements
-  label: "block text-sm font-medium text-cyan-100 mb-2",
-  inputContainer: "relative",
-  inputIcon: "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-cyan-300/60",
-  input: "w-full pl-10 pr-4 py-3 bg-[#09162b] border border-cyan-900/50 text-cyan-50 rounded-xl focus:ring-2 focus:ring-cyan-400/60 focus:border-cyan-400",
-  passwordInput: "w-full pl-10 pr-10 py-3 bg-[#09162b] border border-cyan-900/50 text-cyan-50 rounded-xl focus:ring-2 focus:ring-cyan-400/60 focus:border-cyan-400",
-  passwordToggle: "absolute inset-y-0 right-0 pr-3 flex items-center text-cyan-300/60 hover:text-cyan-200",
-  
-  // Checkbox
-  checkboxContainer: "mb-6 flex items-center",
-  checkbox: "w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500",
-  checkboxLabel: "ml-2 block text-sm text-cyan-100/80",
-  
-  // Button
-  button: "w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center",
-  buttonDisabled: "opacity-80 cursor-not-allowed",
-  
-  // Sign up link
-  signUpContainer: "mt-8 text-center",
-  signUpText: "text-cyan-100/80",
-  signUpLink: "font-medium text-cyan-300 hover:underline",
-  
-  // Spinner for loading state
-  spinner: "animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-};
-
-// Styles for Navbar component
-export const navbarStyles = {
-  // Layout and container styles
-  header: "sticky top-0 z-50 bg-[#081427]/90 border-b border-cyan-900/40 shadow-sm backdrop-blur-xl",
-  container: "flex items-center justify-between px-4 py-3 md:px-8 max-w-7xl mx-auto",
-  
-  // Logo styles
-  logoContainer: "flex items-center gap-0 cursor-pointer",
-  logoImage: "w-15 h-15 rounded-xl overflow-hidden",
-  
-  // Text styles
-  logoText: "font-display lg:text-3xl md:text-3xl text-2xl bg-gradient-to-r from-cyan-200 to-teal-300 bg-clip-text text-transparent text-glow",
-  
-  // User profile styles
-  userContainer: "relative",
-  userButton: "flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-cyan-900/20 transition-colors",
-  userAvatar: "w-9 h-9 flex items-center justify-center rounded-full bg-gradient-to-br from-teal-600 to-cyan-500 text-white font-bold text-lg",
-  statusIndicator: "absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white",
-  userTextContainer: "text-left hidden md:block",
-  userName: "text-sm font-medium text-cyan-100 truncate max-w-[120px]",
-  userEmail: "text-xs text-cyan-100/60 truncate max-w-[120px]",
-  chevronIcon: (isOpen) => `w-4 h-4 text-cyan-200/70 transition-transform ${isOpen ? "rotate-180" : ""}`,
-  
-  // Dropdown menu styles
-  dropdownMenu: "absolute top-14 right-0 w-56 bg-[#0f1c33] rounded-xl shadow-lg border border-cyan-900/40 z-50",
-  dropdownHeader: "px-4 py-3 border-b border-cyan-900/40",
-  dropdownAvatar: "w-10 h-10 rounded-full bg-gradient-to-br from-teal-600 to-cyan-500 flex items-center justify-center text-white font-bold text-lg",
-  dropdownName: "text-sm text-cyan-100 ",
-  dropdownEmail: "text-xs text-cyan-100/60",
-  
-  // Menu items
-  menuItemContainer: "p-1.5",
-  menuItem: "w-full px-4 py-3 text-left hover:bg-cyan-900/30 text-sm text-cyan-100 flex items-center gap-3 rounded-lg",
-  menuItemBorder: "p-1.5 border-t border-cyan-900/40",
-  logoutButton: "flex w-full items-center gap-3 px-4 py-3 text-sm hover:bg-red-500/10 text-red-300 rounded-lg"
-};
-
-
-// In src/assets/dummyStyles.js - add these styles
-export const signupStyles = {
-  // Page container (reusing from login)
-  pageContainer: "min-h-screen flex items-center justify-center p-4 bg-transparent",
-  
-  // Card container (reusing from login)
-  cardContainer: "w-full max-w-md bg-[#0f1c33]/95 rounded-3xl shadow-xl overflow-hidden border border-cyan-900/50",
-  
-  // Header styles (reusing from login with additions)
-  header: "bg-gradient-to-r from-cyan-500 to-teal-500 p-6 text-center relative",
-  avatar: "w-20 h-20 mx-auto rounded-full bg-slate-900/25 flex items-center justify-center mb-4",
+  // Avatar
+  profileAvatar: "w-20 h-20 mx-auto rounded-full bg-slate-900/25 flex items-center justify-center mb-4",
   headerTitle: "font-display text-2xl font-bold text-slate-950",
   headerSubtitle: "text-slate-900/70 mt-2",
   backButton: "absolute top-4 left-4 p-2 text-slate-900 rounded-full hover:bg-slate-900/10 transition-colors",
   
   // Form container (reusing from login)
   formContainer: "p-8",
+};
+
+export const signupStyles = {
+  // Main container
+  pageContainer: "min-h-screen flex items-center justify-center",
   
-  // Error messages
-  apiError: "mb-4 text-center text-sm text-red-300",
-  fieldError: "mt-1 text-sm text-red-300",
+  // Form card
+  cardContainer: "bg-[#0f1c33]/95 backdrop-blur-xl border border-cyan-900/40 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4",
   
-  // Form elements (reusing from login with additions)
-  label: "block text-sm font-medium text-cyan-100 mb-2",
+  // Header
+  header: "text-center mb-6 relative",
+  avatar: "w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center",
+  headerTitle: "font-display text-2xl font-bold text-cyan-50 mb-2",
+  headerSubtitle: "text-cyan-100/60",
+  
+  // Back button
+  backButton: "absolute left-0 top-0 p-2 rounded-lg text-cyan-100/60 hover:text-cyan-100 hover:bg-cyan-900/30 transition-colors",
+  
+  // Form elements
+  formContainer: "space-y-4",
   inputContainer: "relative",
-  inputIcon: "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-cyan-300/60",
-  input: "w-full pl-10 pr-4 py-3 bg-[#09162b] border border-cyan-900/50 text-cyan-50 rounded-xl focus:ring-2 focus:ring-cyan-400/60 focus:border-cyan-400",
-  passwordInput: "w-full pl-10 pr-10 py-3 bg-[#09162b] border border-cyan-900/50 text-cyan-50 rounded-xl focus:ring-2 focus:ring-cyan-400/60 focus:border-cyan-400",
-  passwordToggle: "absolute inset-y-0 right-0 pr-3 flex items-center text-cyan-300/60 hover:text-cyan-200",
+  input: "w-full pl-10 pr-4 py-3 bg-[#09162b] text-cyan-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/40 placeholder:text-cyan-100/30",
+  passwordInput: "w-full pl-10 pr-12 py-3 bg-[#09162b] text-cyan-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/40 placeholder:text-cyan-100/30",
+  inputIcon: "absolute left-3 top-1/2 -translate-y-1/2 text-cyan-100/40 w-5 h-5",
+  passwordToggle: "absolute right-3 top-1/2 -translate-y-1/2 text-cyan-100/40 hover:text-cyan-100/80 w-5 h-5",
   
-  // Checkbox (reusing from login)
-  checkboxContainer: "mb-6 flex items-center",
-  checkbox: "w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500",
-  checkboxLabel: "ml-2 block text-sm text-cyan-100/80",
+  // Label
+  label: "block text-sm font-medium text-cyan-100/80 mb-1",
   
-  // Button (reusing from login)
-  button: "w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center",
-  buttonDisabled: "opacity-80 cursor-not-allowed",
+  // Checkbox
+  checkboxContainer: "flex items-center gap-2",
+  checkbox: "w-4 h-4 accent-cyan-500 rounded",
+  checkboxLabel: "text-sm text-cyan-100/70",
   
-  // Sign in link (reusing from login with modifications)
-  signInContainer: "mt-8 text-center",
-  signInText: "text-cyan-100/80",
-  signInLink: "font-medium text-cyan-300 hover:underline",
+  // Button
+  button: "w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-600 text-slate-950 py-3 rounded-xl font-semibold hover:from-cyan-400 hover:to-teal-500 transition-all shadow-lg",
+  buttonDisabled: "opacity-60 cursor-not-allowed",
   
-  // Spinner for loading state (reusing from login)
-  spinner: "animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+  // Errors
+  apiError: "text-red-400 text-sm bg-red-500/10 border border-red-500/30 rounded-xl p-3 mb-2",
+  fieldError: "text-red-400 text-xs mt-1",
+  
+  // Footer
+  signInContainer: "text-center mt-6",
+  signInText: "text-cyan-100/60",
+  signInLink: "text-cyan-400 hover:text-cyan-300 font-medium",
+  
+  // Spinner
+  spinner: "animate-spin h-4 w-4",
+};
+
+export const modalStyles = {
+  overlay: "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4",
+  modalContainer: "bg-[#0f1c33] border border-cyan-900/40 rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto",
+  modalHeader: "flex justify-between items-center px-6 pt-6 pb-4 border-b border-cyan-900/40",
+  modalTitle: "font-display text-xl font-bold text-cyan-50",
+  closeButton: "p-2 rounded-lg text-cyan-100/60 hover:text-cyan-100 hover:bg-cyan-900/30 transition-colors",
+  form: "px-6 py-5 space-y-4",
+  label: "block text-sm font-medium text-cyan-100/80 mb-1",
+  input: (ring) => `w-full px-4 py-2.5 bg-[#09162b] text-cyan-50 border border-cyan-900/50 rounded-xl focus:outline-none focus:ring-2 ${ring} placeholder:text-cyan-100/30`,
+  typeButtonContainer: "flex gap-2",
+  typeButton: (isActive, activeClass) => `flex-1 py-2 rounded-xl text-sm font-medium transition-all border ${isActive ? activeClass : "border-cyan-900/50 text-cyan-100/60 hover:bg-cyan-900/20"}`,
+  submitButton: (btnClass) => `w-full py-3 rounded-xl font-semibold text-sm transition-all shadow-md ${btnClass}`,
+  colorClasses: {
+    teal: {
+      ring: "focus:ring-teal-500/40",
+      button: "bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950",
+      typeButtonSelected: "bg-teal-500/20 border-teal-500/60 text-teal-300",
+    },
+    orange: {
+      ring: "focus:ring-orange-500/40",
+      button: "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white",
+      typeButtonSelected: "bg-orange-500/20 border-orange-500/60 text-orange-300",
+    },
+    green: {
+      ring: "focus:ring-green-500/40",
+      button: "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white",
+      typeButtonSelected: "bg-green-500/20 border-green-500/60 text-green-300",
+    },
+  },
+};
+
+export const navbarStyles = {
+  header: "sticky top-0 z-30 bg-[#0a1629]/95 backdrop-blur-md border-b border-cyan-900/40 shadow-lg",
+  container: "max-w-screen-2xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between",
+  logoContainer: "flex items-center gap-2 cursor-pointer select-none",
+  logoText: "font-display text-xl font-bold bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent",
+  userContainer: "relative",
+  userButton: "flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-cyan-900/30 transition-all",
+  userAvatar: "w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center text-sm font-bold text-slate-950",
+  statusIndicator: "absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-[#0a1629]",
+  userTextContainer: "hidden sm:block text-left",
+  userName: "text-sm font-semibold text-cyan-50 leading-tight",
+  userEmail: "text-xs text-cyan-100/60 leading-tight truncate max-w-[140px]",
+  chevronIcon: (open) => `w-4 h-4 text-cyan-100/60 transition-transform ${open ? "rotate-180" : ""}`,
+  dropdownMenu: "absolute right-0 mt-2 w-56 bg-[#0f1c33] border border-cyan-900/50 rounded-2xl shadow-2xl overflow-hidden z-50",
+  dropdownHeader: "px-4 py-3 border-b border-cyan-900/40 bg-cyan-900/10",
+  dropdownAvatar: "w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center text-sm font-bold text-slate-950",
+  dropdownName: "text-sm font-semibold text-cyan-50",
+  dropdownEmail: "text-xs text-cyan-100/60 truncate",
+  menuItemContainer: "px-2 py-2",
+  menuItem: "flex items-center gap-2 w-full px-3 py-2 text-sm text-cyan-100 hover:bg-cyan-900/30 rounded-xl transition-colors",
+  menuItemBorder: "px-2 py-2 border-t border-cyan-900/40",
+  logoutButton: "flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-xl transition-colors",
+};
+
+export const loginStyles = {
+  // Main container
+  pageContainer: "min-h-screen flex items-center justify-center",
+  
+  // Form card
+  cardContainer: "bg-[#0f1c33]/95 backdrop-blur-xl border border-cyan-900/40 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4",
+  
+  // Header
+  header: "text-center mb-8",
+  avatar: "w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center",
+  headerTitle: "font-display text-2xl font-bold text-cyan-50 mb-2",
+  headerSubtitle: "text-cyan-100/60",
+  
+  // Form elements
+  formContainer: "space-y-5",
+  inputContainer: "relative",
+  input: "w-full pl-10 pr-4 py-3 bg-[#09162b] text-cyan-50 border border-cyan-900/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/40 placeholder:text-cyan-100/30",
+  passwordInput: "w-full pl-10 pr-12 py-3 bg-[#09162b] text-cyan-50 border border-cyan-900/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/40 placeholder:text-cyan-100/30",
+  inputIcon: "absolute left-3 top-1/2 -translate-y-1/2 text-cyan-100/40 w-5 h-5",
+  passwordToggle: "absolute right-3 top-1/2 -translate-y-1/2 text-cyan-100/40 hover:text-cyan-100/80 w-5 h-5",
+  
+  // Label
+  label: "block text-sm font-medium text-cyan-100/80 mb-1",
+  
+  // Checkbox
+  checkboxContainer: "flex items-center gap-2",
+  checkbox: "w-4 h-4 accent-cyan-500 rounded border-cyan-900/50",
+  checkboxLabel: "text-sm text-cyan-100/70",
+  
+  // Button
+  button: "w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-600 text-slate-950 py-3 rounded-xl font-semibold hover:from-cyan-400 hover:to-teal-500 transition-all shadow-lg",
+  buttonDisabled: "opacity-60 cursor-not-allowed",
+  
+  // Error
+  errorContainer: "flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/30 rounded-xl mb-4",
+  errorIcon: "text-red-400 flex-shrink-0",
+  errorText: "text-red-400 text-sm",
+  
+  // Footer
+  signUpContainer: "text-center mt-6",
+  signUpText: "text-cyan-100/60",
+  signUpLink: "text-cyan-400 hover:text-cyan-300 font-medium",
+  
+  // Spinner
+  spinner: "animate-spin h-4 w-4",
 };
 
 export const transactionItemStyles = {
-  // Container styles
-  container: (isEditing, classes) => 
-    `flex flex-col md:flex-row items-stretch justify-between gap-3 p-4 rounded-xl border border-gray-100 mb-3 last:mb-0 ${isEditing ? classes.bg : "hover:bg-gray-50"}`,
-  
-  // Layout styles
-  mainContainer: "flex items-center gap-3 flex-1 min-w-0",
-  actionsContainer: "flex items-center justify-between gap-3 mt-2 md:mt-0",
-  amountContainer: "min-w-[100px] flex-shrink-0 flex justify-end",
-  buttonsContainer: "flex gap-1 flex-shrink-0",
-  
-  // Icon styles
-  iconContainer: (iconClass, classes) => `${iconClass} ${classes.iconBg}`,
-  
   // Content styles
   contentContainer: "min-w-0 flex-1",
-  description: "font-medium text-gray-800 truncate",
-  details: "text-xs text-gray-500 mt-1 truncate",
+  description: "font-medium text-cyan-50 truncate",
+  details: "text-xs text-cyan-100/70 mt-1 truncate",
   
   // Input styles
   input: (hasError, classes) => 
-    `w-full bg-white rounded-lg px-3 py-2 focus:outline-none focus:ring-1 ${hasError ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`,
-  amountInput: (hasError, classes) => 
-    `w-full max-w-[120px] bg-white rounded-lg px-3 py-2 focus:outline-none focus:ring-1 ${hasError ? "border-red-500 ring-red-500" : `${classes.border} ${classes.ring}`}`,
-  
-  // Error styles
-  errorText: "text-xs text-red-600 mt-1",
-  
-  // Amount display
-  amountText: (amountClass, classes) => `${amountClass} ${classes.text}`,
+    `w-full px-3 py-2 rounded-lg text-sm transition-colors ${
+      hasError 
+        ? 'border-red-500 bg-red-50 text-red-700 placeholder-red-400' 
+        : `${classes.bg} ${classes.text} placeholder:${classes.text}/60`
+    } focus:outline-none focus:ring-2 focus:ring-blue-500`,
   
   // Button styles
   saveButton: (classes) => `p-2 ${classes.button} rounded-lg`,
-  cancelButton: "p-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400",
+  cancelButton: "p-2 bg-[#1a2f4a] text-cyan-100 rounded-lg hover:bg-[#233855]",
   editButton: (classes) => `p-2 ${classes.text} rounded-lg hover:${classes.bg}`,
-  deleteButton: (classes) => `p-2 ${classes.text} rounded-lg hover:${classes.bg}`
 };
 
-// Centralized styles for the application
 export const sidebarStyles = {
-  // Layout and container styles
   sidebarContainer: {
-    base: "hidden lg:flex flex-col pt-3 fixed top-16 bottom-0 z-30"
+    base: "hidden lg:flex flex-col fixed left-0 top-0 h-full bg-[#0a1629]/98 border-r border-cyan-900/40 transition-all duration-300 z-40",
   },
-  
   sidebarInner: {
-    base: "bg-[#0b1830] border-r border-cyan-900/40 shadow-md h-full flex flex-col"
+    base: "flex flex-col h-full overflow-hidden",
   },
-  
-  // User profile section
-  userProfileContainer: {
-    base: "p-4 border-b pt-20 md:pt-5 lg:pt-5 xl:pt-5 border-gray-100",
-    collapsed: "px-3",
-    expanded: "px-6"
-  },
-  
-  userInitials: {
-    base: "w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center text-white font-bold text-xl"
-  },
-  
-  // Menu items
-  menuList: {
-    base: "space-y-1 px-2"
-  },
-  
-  menuItem: {
-    base: "relative flex items-center gap-3 py-3 rounded-xl font-medium transition-all duration-200",
-    active: "text-cyan-200 bg-cyan-500/15",
-    inactive: "text-cyan-100/75 hover:text-cyan-200 hover:bg-cyan-500/10",
-    collapsed: "justify-center px-0 mx-2",
-    expanded: "px-4"
-  },
-  
-  menuIcon: {
-    active: "text-teal-600",
-    inactive: "text-cyan-100/55"
-  },
-  
-  activeIndicator: "absolute right-4 w-2 h-2 bg-teal-400 rounded-full animate-ping",
-  
-  // Toggle button
   toggleButton: {
-    base: "absolute -right-3 top-12 z-20 w-6 h-6 bg-[#0f1c33] border border-cyan-900/50 rounded-full flex items-center justify-center text-cyan-200/80 hover:text-cyan-200 hover:border-cyan-400/50 hover:bg-cyan-900/40 transition-all"
+    base: "self-end m-3 p-2 rounded-lg text-cyan-100/60 hover:text-cyan-100 hover:bg-cyan-900/30 transition-colors",
   },
-  
-  // Footer section
+  userProfileContainer: {
+    base: "flex flex-col items-center px-4 py-4 border-b border-cyan-900/40",
+    collapsed: "px-2",
+    expanded: "",
+  },
+  userInitials: {
+    base: "w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center text-sm font-bold text-slate-950 flex-shrink-0",
+  },
+  menuList: {
+    base: "space-y-1 px-3",
+  },
+  menuItem: {
+    base: "flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all",
+    active: "bg-gradient-to-r from-cyan-500/20 to-teal-500/10 text-cyan-300 border border-cyan-500/30",
+    inactive: "text-cyan-100/70 hover:bg-cyan-900/30 hover:text-cyan-100",
+    collapsed: "justify-center px-2",
+    expanded: "",
+  },
+  menuIcon: {
+    active: "text-cyan-400",
+    inactive: "text-cyan-100/60",
+  },
+  activeIndicator: "ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400",
   footerContainer: {
-    base: "border-t border-gray-100 p-4",
-    collapsed: "px-3",
-    expanded: "px-6"
+    base: "mt-auto px-3 py-4 border-t border-cyan-900/40",
+    collapsed: "flex justify-center",
+    expanded: "",
   },
-  
-  footerLink: {
-    base: "flex items-center gap-3 py-2 rounded-xl font-medium text-gray-600 hover:text-teal-700 hover:bg-gray-50",
-    collapsed: "justify-center"
-  },
-  
   logoutButton: {
-    base: "flex items-center gap-3 py-2 rounded-xl font-medium text-cyan-100/75 hover:text-red-300 hover:bg-red-500/10 w-full mt-1",
-    collapsed: "justify-center"
+    base: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all w-full",
+    collapsed: "justify-center",
   },
-  
-  // Mobile sidebar
-  mobileOverlay: "fixed inset-0 z-40 lg:hidden",
-  mobileBackdrop: "absolute inset-0 bg-black/30 backdrop-blur-sm",
-  
+  // Mobile
+  mobileMenuButton: "lg:hidden fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-br from-cyan-500 to-teal-600 text-white rounded-full flex items-center justify-center shadow-xl",
+  mobileOverlay: "lg:hidden fixed inset-0 z-50 flex",
+  mobileBackdrop: "absolute inset-0 bg-black/60 backdrop-blur-sm",
   mobileSidebar: {
-    base: "absolute left-0 top-0 bottom-0 w-4/5 max-w-sm bg-[#0b1830] shadow-2xl rounded-r-2xl overflow-hidden"
+    base: "relative flex flex-col w-72 h-full bg-[#0a1629] border-r border-cyan-900/40 shadow-2xl",
   },
-  
-  mobileHeader: "p-6 flex justify-between items-center border-b border-cyan-900/40",
-  mobileUserContainer: "flex pt-28 items-center gap-3",
-  mobileCloseButton: "p-2 rounded-lg hover:bg-cyan-500/10",
-  
+  mobileHeader: "flex items-center justify-between px-4 py-4 border-b border-cyan-900/40",
+  mobileUserContainer: "flex items-center gap-3",
+  mobileCloseButton: "p-2 rounded-lg text-cyan-100/60 hover:text-cyan-100 hover:bg-cyan-900/30 transition-colors",
   mobileMenuList: "space-y-1",
   mobileMenuItem: {
-    base: "flex items-center gap-4 px-6 py-4 font-medium",
-    active: "text-cyan-200 bg-cyan-500/15",
-    inactive: "text-cyan-100/75 hover:bg-cyan-500/10"
+    base: "flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all",
+    active: "bg-gradient-to-r from-cyan-500/20 to-teal-500/10 text-cyan-300 border border-cyan-500/30",
+    inactive: "text-cyan-100/70 hover:bg-cyan-900/30 hover:text-cyan-100",
   },
-  
-  mobileFooter: "border-t border-cyan-900/40 p-6",
-  mobileFooterLink: "flex items-center gap-4 py-2 font-medium text-gray-600 hover:text-teal-700",
-  mobileLogoutButton: "flex items-center gap-4 py-2 font-medium text-cyan-100/75 hover:text-red-300 w-full",
-  
-  // Mobile menu button
-  mobileMenuButton: "lg:hidden fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-br from-cyan-500 to-teal-600 text-white rounded-full flex items-center justify-center shadow-xl"
+  mobileFooter: "mt-auto px-4 py-4 border-t border-cyan-900/40",
+  mobileLogoutButton: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 w-full",
 };
 
 // Helper function to combine class names
 export const cn = (...classes) => classes.filter(Boolean).join(" ");
-
-// assets/dummyStyles.js
 
 export const styles = {
   // Layout and Container Styles

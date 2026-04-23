@@ -1,6 +1,5 @@
 import React, { useState, useCallback, memo } from "react";
-import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, User, Mail, Lock, X, LogOut } from "lucide-react";
+import { Eye, EyeOff, User, Lock, X, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -37,7 +36,6 @@ const PasswordInput = memo(({ name, label, value, error, showField, onToggle, on
 PasswordInput.displayName = "PasswordInput";
 
 const ProfilePage = ({ user: propUser, onUpdateProfile, onLogout }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(propUser || {});
   const [editMode, setEditMode] = useState(false);
   const [tempUser, setTempUser] = useState({ name: propUser?.name || "", email: propUser?.email || "" });
